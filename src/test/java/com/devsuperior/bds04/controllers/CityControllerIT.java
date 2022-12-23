@@ -40,7 +40,6 @@ public class CityControllerIT {
 
     @BeforeEach
     void setUp() throws Exception {
-
         clientUsername = "ana@gmail.com";
         clientPassword = "123456";
         adminUsername = "bob@gmail.com";
@@ -49,7 +48,6 @@ public class CityControllerIT {
 
     @Test
     public void insertShouldReturn401WhenNoUserLogged() throws Exception {
-
         CityDTO dto = new CityDTO(null, "Recife");
         String jsonBody = objectMapper.writeValueAsString(dto);
 
@@ -64,7 +62,6 @@ public class CityControllerIT {
 
     @Test
     public void insertShouldReturn403WhenClientLogged() throws Exception {
-
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, clientUsername, clientPassword);
 
         CityDTO dto = new CityDTO(null, "Recife");
@@ -82,7 +79,6 @@ public class CityControllerIT {
 
     @Test
     public void insertShouldInsertResourceWhenAdminLoggedAndCorrectData() throws Exception {
-
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
         CityDTO dto = new CityDTO(null, "Recife");
@@ -102,7 +98,6 @@ public class CityControllerIT {
 
     @Test
     public void insertShouldReturn422WhenAdminLoggedAndBlankName() throws Exception {
-
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
         CityDTO dto = new CityDTO(null, "    ");
@@ -122,7 +117,6 @@ public class CityControllerIT {
 
     @Test
     public void findAllShouldReturnAllResourcesSortedByName() throws Exception {
-
         ResultActions result =
                 mockMvc.perform(get("/cities")
                         .contentType(MediaType.APPLICATION_JSON));
